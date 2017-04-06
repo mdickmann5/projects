@@ -1,6 +1,5 @@
 #ifndef PROJECT_BST_SET_H
 #define PROJECT_BST_SET_H
-#include <list>
 #include "BinarySearchTree.h"
 /** DO NOT MODIFY THE LINE BELOW THIS. IT WILL BE USED FOR TESTING. */
 #define UNIT_TEST
@@ -41,7 +40,7 @@ class Set {
   Set<T> intersection(const Set<T> &other) const;
   Set<T> difference(const Set<T> &other) const;
   Set<T> symmetricDifference(const Set<T> &other) const;
-
+ private:
   BinarySearchTree<T> tree;
 };
 
