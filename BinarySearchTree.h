@@ -4,8 +4,8 @@
 #define UNIT_TEST
 
 #include "Exceptions.h"
+#include <list>
 #include <vector>
-#include <algorithm>
 using std::vector;
 
 template<typename T>
@@ -43,7 +43,7 @@ class BinarySearchTree {
   void remove(T val);
   vector<T> getValues() const;
   int size() const;
-
+ private:
   Node<T> *root = nullptr;
   void add(Node<T> *&root_node, Node<T> *&new_node);
   Node<T> *remove(Node<T> *&root_node, T val);
@@ -59,15 +59,15 @@ BinarySearchTree<T>::BinarySearchTree() {}
 template<typename T>
 BinarySearchTree<T>::BinarySearchTree(vector<T> values) {
   root = new Node<T>(values[0]);
-  for(int i = 1; i<values.size(); i++){
-	add(values[i]);	
+  for(auto elem : values){
+	add(elem);	
   }
 	
 }
   
 template<typename T>
 BinarySearchTree<T>::~BinarySearchTree() {
-  
+  destroy(root);
 }
 template<typename T>
 void BinarySearchTree<T>::add(T val) {
@@ -222,7 +222,12 @@ Node<T> *BinarySearchTree<T>::remove(Node<T> *&root_node, T val) {
 
 template<typename T>
 void BinarySearchTree<T>::destroy(Node<T> *&node) {
-  delete node;
+  if (node==nullptr){}
+   else{
+        destroy(node->left);
+        destroy(node->right);
+        delete node;
+}
 }
 
 #endif //PROJECT_BST_BINARYSEARCHTREE_H
